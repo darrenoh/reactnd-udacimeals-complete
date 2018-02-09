@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 class App extends Component {
   render() {
@@ -8,6 +9,15 @@ class App extends Component {
       </div>
     );
   }
+};
+
+function mapStateToProps (calendar) {
+  return {
+    calendar: Object.keys(calendar).map(day => ({
+      day,
+      meals: Object.assign({}, calendar[day])
+    }))
+  };
 }
 
-export default App;
+export default connect(mapStateToProps)(App);
